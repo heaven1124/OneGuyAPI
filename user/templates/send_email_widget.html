@@ -1,0 +1,16 @@
+<input type="{{ widget.type }}" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %}>
+
+<p>
+    <button type="button" style="padding: 5px 10px;border-radius: 5px;background-color: lightblue" onclick="send('{{ widget.value }}')">send email</button>
+</p>
+
+<script>
+    function send(email) {
+        fetch('/send_mail/' + email + "/")
+        .then(resp => resp.json())
+        .then(data => {
+            alert(data.msg)
+        })
+
+    }
+</script>
